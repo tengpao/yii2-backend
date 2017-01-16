@@ -5,8 +5,6 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
@@ -48,7 +46,7 @@ AppAsset::register($this);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Teng.Pao 后台管理系统</a>
+            <a class="navbar-brand" href="<?= Yii::$app->homeUrl ?>">Teng.Pao 后台管理系统</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -313,6 +311,10 @@ AppAsset::register($this);
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                    <?= Alert::widget() ?>
                     <?= $content ?>
                 </div>
             </div>
