@@ -27,7 +27,16 @@ class ChangePassword extends Model
             [['oldPassword', 'newPassword', 'retypePassword'], 'required'],
             [['oldPassword'], 'validatePassword'],
             [['newPassword'], 'string', 'min' => 6],
-            [['retypePassword'], 'compare', 'compareAttribute' => 'newPassword'],
+            [['retypePassword'], 'compare', 'compareAttribute' => 'newPassword', 'message' => '两次密码输入不一致!'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'oldPassword' => '原密码',
+            'newPassword' => '新密码',
+            'retypePassword' => '确认密码',
         ];
     }
 
@@ -40,7 +49,7 @@ class ChangePassword extends Model
         /* @var $user User */
         $user = Yii::$app->user->identity;
         if (!$user || !$user->validatePassword($this->oldPassword)) {
-            $this->addError('oldPassword', 'Incorrect old password.');
+            $this->addError('oldPassword', '用户名或密码错误!');
         }
     }
 

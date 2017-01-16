@@ -51,7 +51,7 @@ class UserController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
-                    'logout' => ['post'],
+//                    'logout' => ['post'],
                     'activate' => ['post'],
                 ],
             ],

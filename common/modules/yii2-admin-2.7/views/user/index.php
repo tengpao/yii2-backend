@@ -12,9 +12,9 @@ $this->title = Yii::t('rbac-admin', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <p>
+        <?= Html::a('添加用户', ['signup'], ['class' => 'btn btn-success']) ?>
+    </p>
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => Helper::filterActionColumn(['view', 'activate', 'delete']),
+                'template' => Helper::filterActionColumn(['view', 'assignment', 'activate', 'delete']),
                 'buttons' => [
                     'activate' => function($url, $model) {
                         if ($model->status == 10) {
@@ -50,6 +50,20 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-pjax' => '0',
                         ];
                         return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, $options);
+                    },
+                    'assignment' => function($url, $model) {
+                        $url = \yii\helpers\Url::toRoute(['assignment/view', 'id' => $model->id]);
+                        /*if ($model->status == 10) {
+                            return '';
+                        }
+                        $options = [
+                            'title' => Yii::t('rbac-admin', 'Activate'),
+                            'aria-label' => Yii::t('rbac-admin', 'Activate'),
+                            'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to activate this user?'),
+                            'data-method' => 'post',
+                            'data-pjax' => '0',
+                        ];*/
+                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url/*, $options*/);
                     }
                     ]
                 ],

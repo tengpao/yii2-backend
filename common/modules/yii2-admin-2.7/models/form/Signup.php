@@ -22,16 +22,25 @@ class Signup extends Model
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => 'mdm\admin\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => 'mdm\admin\models\User', 'message' => '用户名已被占用!'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => 'mdm\admin\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => 'mdm\admin\models\User', 'message' => '邮箱已被使用!'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => '用户名',
+            'email' => '邮箱',
+            'password' => '密码',
         ];
     }
 
